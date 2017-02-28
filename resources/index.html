@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>潘朵朵首页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<meta name="HandheldFriendly" content="true">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="stylesheet" type="text/css" href="../css/base.css" />
+	<link rel="stylesheet" href="../css/libs.css" />
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script language="JavaScript" src="../js/comm.js"></script>
+	<script language="JavaScript" src="../js/index.js"></script>
+</head>
+<body>
+	<input id="s_id" style="display:none" value="123"></input><!-- 此处隐藏域的value需要取到后台传到前台的userid值-->
+	<header class="mb-line-b">
+		<div class="left-box">
+			<a class="change-city" id="changecity" href="city.html">上海</a>
+			<input id="cityid" style="display:none" value=""></input>
+		</div>
+
+	    <div class="title">潘朵朵</div>
+	    <div class="right-box">
+	    	<a id="homepage" href="index.html">
+	    		<i class="home"></i>
+	    	</a>
+	    	<a id="user" href="user.html">
+	    		<i class="user"></i>
+	    	</a>
+	    </div>
+	</header>
+	<div class="main">
+		<div id="indexBanner" class="public_com-swipeSlide">
+			<ul>
+				<li><a id="bannerurl-defind" href=""><img src="../images/pic_7.jpg"></a></li>
+			</ul>
+		</div><!--banner图-->
+		
+		<div id="indexProduct" class="product-icon">
+			<ul>
+				<li><a href="javascript:void(0);" onclick="getbeautiful(1,'shop_product_meifa.html')" class="item"><i class="icon-hair"></i><span>美发</span></a></li>
+				<li><a href="javascript:void(0);" onclick="getbeautiful(2,'shop_product_meifa.html')" class="item"><i class="icon-nail"></i><span>美甲美睫</span></a></li>
+				<li><a href="javascript:void(0);" onclick="getbeautiful(3,'shop_product_meifa.html')" class="item"><i class="icon-mask"></i><span>美容SPA</span></a></li>
+				<li><a href="javascript:void(0);" onclick="getbeautiful(4,'shop_product_meifa.html')" class="item"><i class="icon-yoga"></i><span>瑜伽</span></a></li>
+				<li><a href="javascript:void(0);" onclick="getbeautiful(5,'shop_product_meifa.html')" class="item"><i class="icon-dance"></i><span>舞蹈</span></a></li>
+			</ul>
+		</div><!--服务项目种类-->
+		<div class="banner"><img src="../images/pic_2.jpg"></div>
+		<div id="" class="store-list">			
+			<div class="store-content">
+				<ul id="tableData">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

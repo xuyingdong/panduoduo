@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>商品详情</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<meta name="HandheldFriendly" content="true">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="stylesheet" type="text/css" href="../css/base.css" />
+	<link rel="stylesheet" href="../css/libs.css" />
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/comm.js"></script>
+	<script type="text/javascript" src="../js/shopDetail.js"></script>
+</head>
+<body>
+	<header class="mb-line-b">
+	    <a class="back back-gray" href="javascript:history.go(-1)">返回</a>
+	    <div class="title">商品详情</div>
+	    <div class="right-box">
+	    	<a id="homepage" href="index.html">
+	    		<i class="home"></i>
+	    	</a>
+	    	<a id="user" href="user.html">
+	    		<i class="user"></i>
+	    	</a>
+	    </div>
+	</header>
+	<div class="main">
+		<div class="group-info">
+			<div class="headbar">
+				<img src="../images/pic_10.jpg" />
+			</div>
+			<div class="cost-box">
+				<div id="porductTitle" class="title"></div>
+				<div class="buy-box">
+				    <div class="price"></div>
+				    <div id="sellprice" class="price sum"></div>
+				    <div class="past Fix">
+				        <div class="t">
+				            <span class="o-price"></span>
+				        </div>
+				    </div>
+				    <div class="last">
+				    	<a id="buy-btn" href="#" class="buy-btn">立即购买</a>
+				    </div>
+				</div>
+			</div>
+		</div><!--group-info-->
+		<div class="near-shop detail-info">
+			<div class="shoplist cont">
+				<div class="flex-box">
+					<aside>
+						<h3 id="name" ></h3>
+						<p id="address"></p>
+					</aside>
+					<a id="tel" class="dis call-link l-line" href="tel:"><i></i></a>
+				</div>
+			</div>
+		</div><!--near-shop-->
+		<div class="detail-info buy-know">
+        	<div class="con">
+        		<div class="detail_box">
+        			<h3 class="tit">购买须知<i class="icon-comm buy"></i></h3>
+        			<div class="detail-box">
+					    <div class="purchase-notes">
+					        <dl>
+					            <dt>服务介绍</dt>
+					            <dd>
+					                <p class="listitem">
+					                	
+									</p>
+					            </dd>
+					        </dl>
+					        <dl>
+					            <dt>服务时间</dt>
+					            <dd>
+					                <p class="listitem"></p>
+					            </dd>
+					        </dl>
+					        <dl>
+					            <dt>营业时间</dt>
+					            <dd>
+					                <p class="listitem"></p>
+					            </dd>
+					        </dl>
+					        <dl>
+					            <dt>规则说明</dt>
+					            <dd>
+					                <p class="listitem">不兑现、不找零、不退货</p>
+					            </dd>
+					        </dl>
+					        <dl>
+					            <dt>温馨提示</dt>
+					            <dd>
+					                <p class="listitem">用户不可同时享受商家其他优惠</p>
+					            </dd>
+					        </dl>
+					        <dl>
+					            <dt>商家服务</dt>
+					            <dd>
+					                <p class="listitem">提供免费WiFi</p>
+					            </dd>
+					        </dl>
+					        <dl>
+					            <dt>发票信息</dt>
+					            <dd>
+					                <p class="listitem">本单发票由商家提供，请在消费时向商家索取</p>
+					            </dd>
+					        </dl>
+					    </div>
+					</div>
+        		</div>
+        	</div>
+		</div><!--buy-know-->
+		<div class="weui_dialog_confirm" id="dialog2" style="display: none;">
+		    <div class="weui_mask"></div>
+		    <div class="weui_dialog">
+		    	<div class="weui_dialog_hd ">支付方式<div class="close"></div></div>
+				<div class="weui_dialog_bd">
+					<a href="javascript:void(0)" onclick="shopping()">
+						<div id="payByBalance" class="divbox">
+							余额支付：<span class="symbol">¥</span><span id="rate" class="price">260.00</span><span id="balance" class="sp">余额不足</span>
+							<span class="arrowent"></span>
+						</div>
+					</a>
+					<div id="" class="divbox">
+						微信支付<span class="arrowent"></span>
+					</div>
+				</div>
+		    </div>
+		</div>
+	</div><!--main-->
+	<script type="text/javascript">
+		$('.buy-btn').click(function(){
+	    	$('#dialog2').show().on('click', '.close', function () {
+	            $('#dialog2').off('click').hide();
+	    	});
+			var sellprice = $.getUrlParam("sellprice")//获取商品优惠价
+			var originalprice = $.getUrlParam("originalprice")//获取商品原价
+			if((sellprice!=null||sellprice!=""))	//判断商品是否有优惠价格
+				$("#rate").text(sellprice);//绑定商品的优惠价格
+			else
+				$("#rate").text(originalprice);//绑定商品的原价
+				
+				
+			if((sellprice!=null||sellprice!="")&&300>=originalprice){	//测试300为余额
+							$(balance).css("display","none");
+			}
+			
+			$.ajax({							
+                    url: "www.baidu.com",			//后台查询余额信息的controller请求路径
+                    type:"post",					
+                    data: {userId:1},				//传入后台的用户id
+                    dataType: "json",				//传入的格式
+                    success: function(Data) {		//回调用户的余额信息
+						if((sellprice==null||sellprice=="")&&Data.balance>originalprice){
+							$(balance).css("display","none");
+						}
+						
+                    }
+            });
+		});
+	</script>
+</body>
+</html>

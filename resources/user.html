@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>个人中心</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<meta name="HandheldFriendly" content="true">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="stylesheet" type="text/css" href="../css/base.css" />
+	<link rel="stylesheet" href="../css/libs.css" />
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/comm.js"></script>
+	<script type="text/javascript" src="../js/user.js"></script>
+</head>
+<body>
+	<header class="mb-line-b">
+	    <a class="back back-gray" href="javascript:history.go(-1)">返回</a>
+	    <div class="title">个人中心</div>
+	    <div class="right-box">
+	    	<a id="homepage" href="index.html">
+	    		<i class="home"></i>
+	    	</a>
+	    	<a id="user" href="user.html">
+	    		<i class="user"></i>
+	    	</a>
+	    </div>
+	</header>
+	<div class="main">
+		<div class="user-box">
+			<div class="earnings">
+                <div class="earnings-title">我的余额<!--<span class="font-gray">查看明细</span>--></div>
+                <div class="price">¥</div>
+				<div id="balance" class="price sum"></div>
+                <!--<i class="icon-go"></i>-->
+            </div>
+            <div id="productBox">
+				<!--<div class="product-box">
+					<div class="time">购买时间：2017-01-01 17:00</div>
+					<div class="con">
+						<dl>
+							<dt>单人总监设计师剪染/烫护套餐</dt>
+							<dd>
+								<div class="price">¥</div>
+								<div class="price sum">698</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt>米兰国际时尚造型</dt>
+						</dl>
+						<dl>
+							<dt>静安区 新闸路925号</dt>
+						</dl>
+					</div>
+					<div class="code">
+						<input class="user-btn" value="店员验证"></input>
+						<span>到店请出示此订单</span>
+					</div>
+				</div>
+				<div class="product-box">
+					<div class="time">购买时间：2017-01-01 17:00</div>
+					<div class="con">
+						<dl>
+							<dt>单人总监设计师剪染/烫护套餐</dt>
+							<dd>
+								<div class="price">¥</div>
+								<div class="price sum">698</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt>米兰国际时尚造型</dt>
+						</dl>
+						<dl>
+							<dt>静安区 新闸路925号</dt>
+						</dl>
+					</div>
+					<div class="code">
+						<input class="user-btn" value="店员验证"></input>
+						<span>到店请出示此订单</span>
+					</div>
+				</div>
+				<div class="product-box">
+					<div class="time">购买时间：2017-01-01 17:00</div>
+					<div class="con">
+						<dl>
+							<dt>单人总监设计师剪染/烫护套餐</dt>
+							<dd>
+								<div class="price">¥</div>
+								<div class="price sum">698</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt>米兰国际时尚造型</dt>
+						</dl>
+						<dl>
+							<dt>静安区 新闸路925号</dt>
+						</dl>
+					</div>
+					<div class="code">
+						<input class="user-btn" value="已使用" disabled="disabled"></input>
+						<span>到店请出示此订单</span>
+					</div>
+				</div>-->
+			</div>
+		</div>
+		
+		<!--BEGIN dialog1-->
+		<div class="weui_dialog_confirm" id="dialog1" style="display: none;">
+		    <div class="weui_mask"></div>
+			<input id="btn-index" style="display:none" value=""></input>
+		    <div class="weui_dialog">
+		        <div class="weui_dialog_hd"><strong class="weui_dialog_title">温馨提示</strong></div>
+		        <div class="weui_dialog_bd">本操作由店员进行，消费者请取消返回。<br>验证完成后，此订单将被改为已使用。<br>确认现在进行验证码？</div>
+		        <div class="weui_dialog_ft">
+		            <a href="javascript:;" id="cancel" class="weui_btn_dialog default">取消</a>
+		            <a href="javascript:;" id="locked" class="weui_btn_dialog primary">确定</a>
+		        </div>
+		    </div>
+		</div>
+		<!--END dialog1-->
+		
+	</div><!--main-->
+	<script type="text/javascript">
+		$('#productBox').on('click','.user-btn',function(e){
+			var v_id = $(e.target).attr('id');	//获取当前节点的id值
+			var ord_id = $("#"+v_id).parent().parent().find('input').val();	//获取当前节点的父节点的父节点的input元素的value
+	    	$('#dialog1').show().on('click', '.weui_btn_dialog', function (e) {
+			
+				if($(e.target).attr('id')=="locked"){
+						$("#"+v_id).attr('disabled','disabled');	//测试方法需要删除
+						$.ajax({							
+							url: "www.baidu.com",			//后台controller的请求路径
+							type:"post",					
+							data: {ordId: ord_id,userID:1},		//传入定单号
+							dataType: "json",				//传入的格式
+							success: function(Data) {		//回调函数返回验证结果（true/false）
+								if(Data)
+									$("#"+v_id).attr('disabled','disabled');		
+							}
+						})
+				}
+				$('#dialog1').off('click').hide();
+            });
+	    });
+		
+		
+	</script>
+</body>
+</html>

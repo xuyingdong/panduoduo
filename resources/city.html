@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>切换城市</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<meta name="HandheldFriendly" content="true">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="stylesheet" type="text/css" href="../css/base.css" />
+	<link rel="stylesheet" href="../css/libs.css" />
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script language="JavaScript" src="../js/comm.js"></script>
+	<script language="JavaScript" src="../js/city.js"></script>
+</head>
+<body>
+	<header class="mb-line-b">
+	    <a class="back back-gray" href="javascript:history.go(-1)">返回</a>
+	    <div class="title">切换城市</div>
+	    <div class="right-box">
+	    	<a id="homepage" href="index.html">
+	    		<i class="home"></i>
+	    	</a>
+	    	<a id="user" href="user.html">
+	    		<i class="user"></i>
+	    	</a>
+	    </div>
+	</header>
+	<div class="main">
+		<a class="cur-city" href="index.html">
+	        <h3>当前城市</h3>
+	        <p class="red" id="localcity">上海</p>
+	    </a>
+	    <div class="city-list">
+		    <ul id="tcontent">
+		        <!--<li class="city-name">
+					<a href="#">温州</a>
+		        </li>
+		        <li class="city-name">
+					<a href="#">东莞</a>
+		        </li>
+		        <li class="city-name">
+					<a href="#">天津</a>
+		        </li>-->
+		    </ul>
+	    </div>
+	</div><!--main-->
+	
+</body>
+</html>
